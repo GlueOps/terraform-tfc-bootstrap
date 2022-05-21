@@ -196,6 +196,8 @@ DISABLED: False
 7. At the `Organization` level, grant `Billing Account Administrator`, `Organization Administrator`, and `Project Creator` roles to `svc-terraform@antoniostacos-1-svc-accounts.iam.gserviceaccount.com`, so they apply to all projects.
 Navigate to IAM and use the email address you saved to apply permissions.
 
+8. For any domains that you plan to manage (ex. via App Engine) you need to ensure the service account is added as an owner to the domain here: https://www.google.com/webmasters/verification/home?hl=en You must do this for each domain you plan to use within GCP
+
 ## Add GCP Credentials in TFC.
 
 1. Create credentials for your service account (svc-terraform@antoniostacos-1-svc-accounts.iam.gserviceaccount.co): https://developers.google.com/workspace/guides/create-credentials#service-account (Make sure you do JSON format). Once you download the credentials in JSON format, remove all the `\n` (newline) characters (e.g. in vim, use :%s/\n//g).
