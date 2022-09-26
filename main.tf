@@ -7,6 +7,7 @@ locals {
       for env in wks.envs : [
         {
           workspace         = wks.workspace
+          vcs_repo          = wks.vcs_repo
           vcs_branch        = wks.vcs_branch
           env               = env
           working_directory = wks.working_directory
@@ -33,9 +34,9 @@ module "workspaces" {
   working_directory             = each.value.working_directory
   oauth_token_id                = var.github_token_id
   tf_local_workspace            = each.value.env
-  vcs_repo                      = "${var.githhub_org_name}/${var.vcs_repo}"
+  vcs_repo                      = "${var.githhub_org_name}/${each.value.vcs_repo}"
   vcs_branch                    = each.value.vcs_branch
-  workspace_ids_to_trigger_runs = [tfe_workspace.gcp-organization.id]
+  workspace_ids_to_trigger_runs = [local.trigger[var.cloud]]
   auto_apply                    = each.value.auto_apply
   slack_token                   = var.slack_token
 }

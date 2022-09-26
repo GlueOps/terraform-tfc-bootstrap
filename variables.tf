@@ -7,6 +7,8 @@ variable "github_token_id" {}
 variable "githhub_org_name" {}
 variable "vcs_repo" {}
 variable "terraform_version" { default = "1.1.9" }
+variable "cloud" { default = "gcp" }
+variable "terraform_cloud_repo" { default = "terraform-cloud" }
 
 
 variable "projects" {
@@ -28,6 +30,7 @@ variable "workspaces" {
   default = [
     {
       workspace         = "gcp-gke"
+      vcs_repo          = "gcp-infrastructure"
       vcs_branch        = "main"
       envs              = ["dev", "stage", "prod"]
       working_directory = "gke/tf"
