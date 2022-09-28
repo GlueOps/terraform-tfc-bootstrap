@@ -6,7 +6,7 @@ variable "tfc_email" {}
 variable "github_token_id" {}
 variable "githhub_org_name" {}
 variable "vcs_repo" {}
-variable "terraform_version" { default = "1.1.9" }
+variable "terraform_version" { default = "1.2.9" }
 variable "cloud" { default = "gcp" }
 variable "terraform_cloud_repo" { default = "terraform-cloud" }
 

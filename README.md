@@ -1,13 +1,15 @@
 # terraform-gcp-tfc-bootstrap
 
-This is an opinated Terraform Module that deploys Terraform Cloud for the use case of GCP. By the end of this setup it will manage itself in Terraform Cloud as well as provide a framework for you to manage other workspaces.
+This is an opinated Terraform Module that deploys Terraform Cloud for mananging cloud infrastructure. By the end of this setup it will manage itself in Terraform Cloud as well as provide a framework for you to manage other workspaces.
+
+This Module can be used in conjunction with [terraform-gcp-organization-bootstrap](https://github.com/GlueOps/terraform-gcp-organization-bootstrap) or [terraform-aws-organization-bootstrap](https://github.com/GlueOps/terraform-aws-organization-bootstrap) to configure a new cloud environment with accounts / projects.
 
 ## Assumptions
 
 * You are using GitHub
 * You are using Slack
 * You plan to keep all your terraform-cloud resources within a single repository (ex. terraform-cloud)
-* You plan to keep all your GCP managed resources within a single repository (ex. gcp-infrastructure)
+* You plan to keep all your Cloud managed resources within a single repository (ex. gcp-infrastructure or aws-infrastructure)
 * You have a terraform cloud account and have not yet create an organization
 
 
@@ -21,9 +23,9 @@ locals {
 }
 
 module "workspaces" {
-  source                = "git::https://github.com/GlueOps/terraform-gcp-tfc-bootstrap.git"
+  source                = "git::https://github.com/GlueOps/terraform-tfc-bootstrap.git"
   org_name              = "antoniostacos"
-  tfc_email             = "antoniostacos@glueops.dev"
+  tfc_email             = "camarero@antoniostacos.net"
   github_token_id       = "XXXXXXXXXXXXXXX"
   slack_token           = "XXXXXXXXXXXXXXX"
   githhub_org_name      = "antoniostacos"
