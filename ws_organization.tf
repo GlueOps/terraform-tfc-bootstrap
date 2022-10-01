@@ -10,7 +10,7 @@ resource "tfe_workspace" "gcp-organization" {
     oauth_token_id = var.github_token_id
 
   }
-  count = var.cloud == "gcp" ? 1 : 0
+  count = contains(var.clouds, "gcp") ? 1 : 0
 }
 
 
@@ -27,5 +27,5 @@ resource "tfe_workspace" "aws-organization" {
     oauth_token_id = var.github_token_id
 
   }
-  count = var.cloud == "aws" ? 1 : 0
+  count = contains(var.clouds,"aws") ? 1 : 0
 }

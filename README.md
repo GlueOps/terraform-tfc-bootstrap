@@ -1,13 +1,15 @@
 # terraform-gcp-tfc-bootstrap
 
-This is an opinated Terraform Module that deploys Terraform Cloud for the use case of GCP. By the end of this setup it will manage itself in Terraform Cloud as well as provide a framework for you to manage other workspaces.
+This is an opinated Terraform Module that deploys Terraform Cloud for mananging cloud infrastructure. By the end of this setup it will manage itself in Terraform Cloud as well as provide a framework for you to manage other workspaces.
+
+This Module can be used in conjunction with [terraform-gcp-organization-bootstrap](https://github.com/GlueOps/terraform-gcp-organization-bootstrap) or [terraform-aws-organization-bootstrap](https://github.com/GlueOps/terraform-aws-organization-bootstrap) to configure a new cloud environment with accounts / projects.
 
 ## Assumptions
 
 * You are using GitHub
 * You are using Slack
 * You plan to keep all your terraform-cloud resources within a single repository (ex. terraform-cloud)
-* You plan to keep all your GCP managed resources within a single repository (ex. gcp-infrastructure)
+* You plan to keep all your Cloud managed resources within a single repository (ex. gcp-infrastructure or aws-infrastructure)
 * You have a terraform cloud account and have not yet create an organization
 
 
@@ -21,14 +23,14 @@ locals {
 }
 
 module "workspaces" {
-  source                = "git::https://github.com/GlueOps/terraform-gcp-tfc-bootstrap.git"
+  source                = "git::https://github.com/GlueOps/terraform-tfc-bootstrap.git"
   org_name              = "antoniostacos"
-  tfc_email             = "antoniostacos@glueops.dev"
+  tfc_email             = "camarero@antoniostacos.net"
   github_token_id       = "XXXXXXXXXXXXXXX"
   slack_token           = "XXXXXXXXXXXXXXX"
   githhub_org_name      = "antoniostacos"
   vcs_repo              = "gcp-infrastructure"
-  cloud                 = "gcp"
+  clouds                 = ["gcp"]
   terraform_cloud_repo  = "terraform-cloud"
   workspaces = [
     {
@@ -38,6 +40,7 @@ module "workspaces" {
       envs              = local.environments
       working_directory = "cloudbuild-trigger/tf"
       auto_apply        = true
+      cloud             = "gcp"
     },
     {
       workspace         = "gcp-iam"
@@ -46,6 +49,7 @@ module "workspaces" {
       envs              = local.environments
       working_directory = "iam/tf"
       auto_apply        = false
+      cloud             = "gcp"
     }
   ]
 }
@@ -68,7 +72,7 @@ module "workspaces" {
 | terraform_version     | Default "1.1.9"                                                                           | No       |
 | notification_triggers | Default ["run:needs_attention"]                                                           | No       |
 | workspaces            | Example documented below.                                                                 | Yes      |
-| cloud                 | Defaults to "gcp" but also supports "aws".                                                | No       |
+| clouds                | Defaults to ["gcp"] but also supports ["gcp","aws"].                                      | No       |
 | terraform_cloud_repo  | Defaults to "terraform-cloud".                                                            | No       |
 
 #### Workspaces example:
@@ -81,6 +85,7 @@ module "workspaces" {
       envs              = ["dev","uat"]
       working_directory = "iam/tf"
       auto_apply        = false
+      cloud             = ["gcp"]
     }
 ```
 The above will create two workspaces in terraform cloud that are called `gcp-iam-dev` and `gcp-iam-uat`, they will not have auto_apply enabled, they will both take changes made to the folder `iam/tf` within the `main` branch of the `gcp-infrastructure` repository.
