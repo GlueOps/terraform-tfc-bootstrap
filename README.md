@@ -29,7 +29,7 @@ module "workspaces" {
   github_token_id       = "XXXXXXXXXXXXXXX"
   slack_token           = "XXXXXXXXXXXXXXX"
   githhub_org_name      = "antoniostacos"
-  vcs_repo              = "gcp-infrastructure"
+  gcp_vcs_repo          = "gcp-infrastructure"
   clouds                 = ["gcp"]
   terraform_cloud_repo  = "terraform-cloud"
   workspaces = [
@@ -68,7 +68,8 @@ module "workspaces" {
 | slack_token           | slack token used for webhook notifications                                                | Yes      |
 | github_token_id       | [Connecting GitHub to Terraform Cloud](https://www.terraform.io/cloud-docs/vcs/github)    | Yes      |
 | githhub_org_name      | Name of your github organization                                                          | Yes      |
-| vcs_repo              | name of the repository containing your GCP terraform                                      | Yes      |
+| gcp_vcs_repo          | name of the repository containing your GCP terraform                                      | Yes      |
+| aws_vcs_repo          | name of the repository containing your AWS terraform                                      | Yes      |
 | terraform_version     | Default "1.2.9"                                                                           | No       |
 | notification_triggers | Default ["run:needs_attention"]                                                           | No       |
 | workspaces            | Example documented below.                                                                 | Yes      |
@@ -80,7 +81,7 @@ module "workspaces" {
 ```hcl
     {
       workspace         = "gcp-iam"
-      vcs_repo          = "gcp-infrastructure"
+      gcp_vcs_repo      = "gcp-infrastructure"
       vcs_branch        = "main"
       envs              = ["dev","uat"]
       working_directory = "iam/tf"
