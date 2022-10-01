@@ -2,7 +2,7 @@
 locals {
   trigger = {
     gcp = contains(var.clouds, "gcp") ? tfe_workspace.gcp-organization[0].id : 0
-    aws = vontains(var.clouds, "aws") ? tfe_workspace.aws-organization[0].id : 0
+    aws = contains(var.clouds, "aws") ? tfe_workspace.aws-organization[0].id : 0
   }
   triggers = [for k, v in local.trigger : v if v != 0]
 }
