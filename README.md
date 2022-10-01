@@ -1,4 +1,4 @@
-# terraform-gcp-tfc-bootstrap
+# terraform-tfc-bootstrap
 
 This is an opinated Terraform Module that deploys Terraform Cloud for mananging cloud infrastructure. By the end of this setup it will manage itself in Terraform Cloud as well as provide a framework for you to manage other workspaces.
 
@@ -69,7 +69,7 @@ module "workspaces" {
 | github_token_id       | [Connecting GitHub to Terraform Cloud](https://www.terraform.io/cloud-docs/vcs/github)    | Yes      |
 | githhub_org_name      | Name of your github organization                                                          | Yes      |
 | vcs_repo              | name of the repository containing your GCP terraform                                      | Yes      |
-| terraform_version     | Default "1.1.9"                                                                           | No       |
+| terraform_version     | Default "1.2.9"                                                                           | No       |
 | notification_triggers | Default ["run:needs_attention"]                                                           | No       |
 | workspaces            | Example documented below.                                                                 | Yes      |
 | clouds                | Defaults to ["gcp"] but also supports ["gcp","aws"].                                      | No       |
