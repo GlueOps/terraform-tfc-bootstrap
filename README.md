@@ -30,7 +30,7 @@ module "workspaces" {
   slack_token           = "XXXXXXXXXXXXXXX"
   githhub_org_name      = "antoniostacos"
   vcs_repo              = "gcp-infrastructure"
-  cloud                 = "gcp"
+  clouds                 = ["gcp"]
   terraform_cloud_repo  = "terraform-cloud"
   workspaces = [
     {
@@ -40,6 +40,7 @@ module "workspaces" {
       envs              = local.environments
       working_directory = "cloudbuild-trigger/tf"
       auto_apply        = true
+      cloud             = "gcp"
     },
     {
       workspace         = "gcp-iam"
@@ -48,6 +49,7 @@ module "workspaces" {
       envs              = local.environments
       working_directory = "iam/tf"
       auto_apply        = false
+      cloud             = "gcp"
     }
   ]
 }
@@ -70,7 +72,7 @@ module "workspaces" {
 | terraform_version     | Default "1.1.9"                                                                           | No       |
 | notification_triggers | Default ["run:needs_attention"]                                                           | No       |
 | workspaces            | Example documented below.                                                                 | Yes      |
-| cloud                 | Defaults to "gcp" but also supports "aws".                                                | No       |
+| clouds                | Defaults to ["gcp"] but also supports ["gcp","aws"].                                      | No       |
 | terraform_cloud_repo  | Defaults to "terraform-cloud".                                                            | No       |
 
 #### Workspaces example:
@@ -83,6 +85,7 @@ module "workspaces" {
       envs              = ["dev","uat"]
       working_directory = "iam/tf"
       auto_apply        = false
+      cloud             = ["gcp"]
     }
 ```
 The above will create two workspaces in terraform cloud that are called `gcp-iam-dev` and `gcp-iam-uat`, they will not have auto_apply enabled, they will both take changes made to the folder `iam/tf` within the `main` branch of the `gcp-infrastructure` repository.
