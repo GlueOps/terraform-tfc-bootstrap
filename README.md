@@ -75,6 +75,7 @@ module "workspaces" {
 | workspaces            | Example documented below.                                                                 | Yes      |
 | clouds                | Defaults to ["gcp"] but also supports ["gcp","aws"].                                      | No       |
 | terraform_cloud_repo  | Defaults to "terraform-cloud".                                                            | No       |
+| cloudflare_enabled    | Defaults to "false".                                                                      | No       |
 
 #### Workspaces example:
 
@@ -201,3 +202,11 @@ https://github.com/GlueOps/terraform-gcp-organization-bootstrap
 2. Take the credentials and add them to the variable set `tfc_core` in Terraform cloud and mark the `AWS_SECRET_ACCESS_KEY` as a secret variable.
    * AWS_ACCESS_KEY_ID
    * AWS_SECRET_ACCESS_KEY
+
+# For Cloudflare:
+
+1. Create an API token with edit access to the zones that it needs. Use a service account/login for this!
+
+2. Take the token and add them to the variable set `tfc_core` in Terraform cloud and mark the `CLOUDFLARE_API_TOKEN` as a secret variable.
+   * CLOUDFLARE_API_TOKEN
+
