@@ -37,7 +37,7 @@ module "workspaces" {
   tf_local_workspace            = each.value.env
   vcs_repo                      = "${var.githhub_org_name}/${each.value.vcs_repo}"
   vcs_branch                    = each.value.vcs_branch
-  workspace_ids_to_trigger_runs = [local.trigger[each.value.cloud]]
+  workspace_ids_to_trigger_runs = []#[local.trigger[each.value.cloud]]
   auto_apply                    = each.value.auto_apply
   slack_token                   = var.slack_token
 }
